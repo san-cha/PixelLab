@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f7f4">
+  <meta name="description" content="PixelLab is a simple, private image processing studio.">
+  <title>PixelLab — Image Processing Studio</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="PixelLab home">
+      <span class="brand-mark">P</span>
+      <span>PixelLab<span class="brand-sub"> / STUDIO</span></span>
+    </a>
+    <span class="privacy-note"><span class="status-dot"></span> Local processing</span>
+  </header>
+
+  <main class="workspace">
+    <section class="intro">
+      <p class="eyebrow">IMAGE PROCESSING WORKSPACE</p>
+      <h1>Make every pixel<br><span>work for you.</span></h1>
+      <p class="intro-copy">A focused space to transform your images. Choose a filter, fine-tune, and export in seconds.</p>
+    </section>
+
+    <section class="studio" aria-label="Image processing studio">
+      <div class="studio-heading">
+        <div>
+          <p class="eyebrow">01 / SOURCE</p>
+          <h2>Your image</h2>
+        </div>
+        <button id="resetButton" class="text-button" type="button" disabled>Reset workspace ↺</button>
+      </div>
+
+      <div id="dropZone" class="drop-zone">
+        <input id="fileInput" type="file" accept=".jpg,.jpeg,.png,image/jpeg,image/png" hidden>
+        <div id="uploadPrompt" class="upload-prompt">
+          <div class="upload-icon" aria-hidden="true">↑</div>
+          <p class="upload-title">Drop your image here</p>
+          <p class="muted">or <button id="browseButton" class="inline-button" type="button">browse files</button></p>
+          <p class="file-hint">JPG or PNG · Up to 8 MB</p>
+        </div>
+        <div id="sourcePreview" class="image-preview hidden">
+          <img id="sourceImage" alt="Original uploaded image">
+          <div class="image-caption">
+            <span id="sourceFilename" class="filename"></span>
+            <span id="sourceDimensions" class="muted"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <div class="studio-heading control-heading">
+          <div>
+            <p class="eyebrow">02 / ADJUST</p>
+            <h2>Choose your treatment</h2>
+          </div>
+          <span class="step-count">6 OPERATIONS</span>
+        </div>
+
+        <label for="operationSelect" class="field-label">Processing operation</label>
+        <select id="operationSelect">
+          <option value="grayscale">Grayscale <span></span></option>
+          <option value="blur">Blur</option>
+          <option value="sharpen">Sharpen</option>
+          <option value="edges">Edge detection</option>
+          <option value="brightness">Brightness</option>
+          <option value="sepia">Sepia</option>
+        </select>
+
+        <div id="brightnessControl" class="brightness-control hidden">
+          <div class="slider-heading">
+            <label for="brightnessSlider" class="field-label">Brightness</label>
+            <output id="brightnessValue" for="brightnessSlider">100%</output>
+          </div>
+          <input id="brightnessSlider" type="range" min="20" max="200" step="5" value="100">
+          <div class="slider-labels"><span>Darker</span><span>Original</span><span>Lighter</span></div>
+        </div>
+
+        <button id="processButton" class="primary-button" type="button" disabled>
+          <span id="processButtonText">Process image</span>
+          <span aria-hidden="true">↗</span>
+        </button>
+        <p id="statusMessage" class="status-message" role="status" aria-live="polite">Upload an image to get started.</p>
+      </div>
+
+      <section id="resultSection" class="result-section hidden">
+        <div class="studio-heading result-heading">
+          <div>
+            <p class="eyebrow">03 / RESULT</p>
+            <h2>Your transformation</h2>
+          </div>
+          <button id="downloadButton" class="download-button" type="button">↓ Download PNG</button>
+        </div>
+        <div class="comparison-grid">
+          <div class="comparison-card">
+            <div class="comparison-label">ORIGINAL</div>
+            <img id="comparisonOriginal" alt="Original image for comparison">
+          </div>
+          <div class="comparison-card">
+            <div class="comparison-label">PROCESSED <span id="resultOperation"></span></div>
+            <img id="processedImage" alt="Processed image result">
+          </div>
+        </div>
+        <p class="result-footnote">Exported as PNG for consistent image quality.</p>
+      </section>
+    </section>
+
+    <footer class="footer">
+      <span>PIXELLAB STUDIO</span>
+      <span>Simple tools. Thoughtful results.</span>
+    </footer>
+  </main>
+</body>
+</html>
