@@ -259,5 +259,10 @@ def test_upload_over_size_limit_is_rejected(client):
         filename="large.png",
     )
 
+    
+def test_pipeline_failure_demo():
+    assert False, "Intentional failure to verify CI/CD pipeline"
+
+
     assert response.status_code == 413
     assert "error" in response.json
