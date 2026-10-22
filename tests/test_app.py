@@ -21,7 +21,7 @@ def make_image(color=(100, 100, 100), size=(32, 32), image_format="PNG"):
     buffer.seek(0)
     return buffer
 
-
+#imgggg
 def make_pattern_image():
     image = Image.new("RGB", (32, 32), "black")
     for x in range(16, 32):
