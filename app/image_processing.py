@@ -47,3 +47,4 @@ def process_image(image, operation, brightness=100):
         ).convert("RGB")
 
     raise ValueError("Unsupported processing operation.")
+#img proc
