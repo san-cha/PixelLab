@@ -37,7 +37,6 @@ jobs:
   docker-build:
     name: Build and smoke test Docker image
     needs: test
-    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
 
     steps:
@@ -71,7 +70,7 @@ jobs:
 
   build-and-push:
     name: Build and publish Docker image
-    needs: test
+    needs: [test, docker-build]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
 
