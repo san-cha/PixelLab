@@ -263,3 +263,10 @@ def test_upload_over_size_limit_is_rejected(client):
 
     assert response.status_code == 413
     assert "error" in response.json
+
+
+def test_index_page_loads(client):
+    response = client.get("/")
+
+    assert response.status_code == 200
+    assert b"PixelLab" in response.data
