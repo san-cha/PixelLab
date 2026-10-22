@@ -46,6 +46,17 @@ jobs:
       - name: Build Docker image
         run: docker build -t pixellab:ci .
 
+      - name: Scan image for vulnerabilities
+        # Pinned to a commit SHA: trivy-action tags were hijacked in March 2026
+        uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1 # v0.35.0
+        with:
+          image-ref: pixellab:ci
+          version: v0.69.3
+          format: table
+          severity: CRITICAL
+          ignore-unfixed: true
+          exit-code: "1"
+
       - name: Start container
         run: docker run -d --name pixellab-ci -p 5000:5000 pixellab:ci
 
