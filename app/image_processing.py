@@ -18,7 +18,7 @@ def process_image(image, operation, brightness=100):
     image = ImageOps.exif_transpose(image).convert("RGB")
 
     if operation == "grayscale":
-        return ImageOps.grayscale(image).convert("RGB")
+        return image.convert("RGB")
 
     if operation == "blur":
         return image.filter(ImageFilter.GaussianBlur(radius=2.5))
